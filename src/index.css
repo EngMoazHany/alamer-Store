@@ -1,0 +1,199 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800;900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-purpleDeep: #3B0A50;
+  --color-purpleDark: #25002F;
+  --color-burgundy: #8A1E4D;
+  --color-burgundyDark: #5C1235;
+  --color-gold: #D4AF37;
+  --color-goldLight: #F4D77A;
+  --color-cream: #FFF8EA;
+  --color-white: #FFFFFF;
+  --font-arabic: Cairo, Tajawal, sans-serif;
+  --font-latin: Poppins, sans-serif;
+  --shadow-luxury: 0 24px 70px rgba(37, 0, 47, 0.18);
+  --shadow-gold: 0 14px 38px rgba(212, 175, 55, 0.25);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: #FFF8EA;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+  background:
+    linear-gradient(135deg, rgba(255, 248, 234, 0.96), rgba(255, 255, 255, 0.9)),
+    radial-gradient(circle at top left, rgba(212, 175, 55, 0.12), transparent 30%);
+  color: #25002F;
+  font-family: Cairo, Tajawal, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+html[lang='en'] body {
+  font-family: Poppins, sans-serif;
+}
+
+button,
+a,
+input {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+img {
+  max-width: 100%;
+}
+
+::selection {
+  background: #D4AF37;
+  color: #25002F;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.luxury-gradient-motion {
+  background-size: 160% 160%;
+  animation: luxuryGradientShift 12s ease-in-out infinite alternate;
+}
+
+.gold-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.gold-shimmer::after {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  width: 42%;
+  transform: translateX(-160%) skewX(-18deg);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  animation: shimmerSweep 3.8s ease-in-out infinite;
+}
+
+html[dir='rtl'] .gold-shimmer::after {
+  animation-name: shimmerSweepRtl;
+}
+
+.soft-float {
+  animation: softFloat 5.5s ease-in-out infinite;
+}
+
+.whatsapp-breathe {
+  animation: whatsappBreathe 2.8s ease-in-out infinite;
+}
+
+.gold-line-shimmer {
+  background-size: 200% 100%;
+  animation: goldLineShimmer 3.5s ease-in-out infinite;
+}
+
+@keyframes luxuryGradientShift {
+  from {
+    background-position: 0% 50%;
+  }
+
+  to {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes shimmerSweep {
+  0%,
+  45% {
+    transform: translateX(-160%) skewX(-18deg);
+  }
+
+  80%,
+  100% {
+    transform: translateX(260%) skewX(-18deg);
+  }
+}
+
+@keyframes shimmerSweepRtl {
+  0%,
+  45% {
+    transform: translateX(260%) skewX(-18deg);
+  }
+
+  80%,
+  100% {
+    transform: translateX(-160%) skewX(-18deg);
+  }
+}
+
+@keyframes softFloat {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -10px, 0);
+  }
+}
+
+@keyframes whatsappBreathe {
+  0%,
+  100% {
+    box-shadow:
+      0 18px 45px rgba(37, 0, 47, 0.24),
+      0 0 0 0 rgba(37, 211, 102, 0.32);
+  }
+
+  50% {
+    box-shadow:
+      0 18px 45px rgba(37, 0, 47, 0.24),
+      0 0 0 12px rgba(37, 211, 102, 0);
+  }
+}
+
+@keyframes goldLineShimmer {
+  0%,
+  100% {
+    background-position: 0% 50%;
+    opacity: 0.7;
+  }
+
+  50% {
+    background-position: 100% 50%;
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

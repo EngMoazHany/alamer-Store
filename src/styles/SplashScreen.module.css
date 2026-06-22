@@ -1,0 +1,214 @@
+.splash {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at center, rgba(212, 175, 55, 0.18), transparent 35%),
+    radial-gradient(circle at 50% 58%, rgba(138, 30, 77, 0.22), transparent 42%),
+    linear-gradient(135deg, #09000d 0%, #25002f 45%, #3b0a50 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  overflow: hidden;
+  animation: fadeOutBg 1s ease forwards 3s;
+}
+
+.splash::before {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  box-shadow:
+    0 0 45px rgba(212, 175, 55, 0.25),
+    inset 0 0 45px rgba(212, 175, 55, 0.12);
+  animation: ringPulse 2s ease-in-out infinite;
+}
+
+.splash::after {
+  content: "";
+  position: absolute;
+  width: min(72vw, 760px);
+  height: min(72vw, 760px);
+  border-radius: 50%;
+  background:
+    conic-gradient(
+      from 18deg,
+      transparent 0deg,
+      rgba(244, 215, 122, 0.1) 34deg,
+      transparent 74deg,
+      transparent 180deg,
+      rgba(244, 215, 122, 0.08) 222deg,
+      transparent 280deg
+    );
+  filter: blur(1px);
+  opacity: 0.8;
+  animation: slowRotate 9s linear infinite;
+}
+
+.logoWrap {
+  position: relative;
+  width: 260px;
+  height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.logoWrap::before,
+.logoWrap::after {
+  content: "";
+  position: absolute;
+  inset: 18px;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.logoWrap::before {
+  border: 1px dashed rgba(244, 215, 122, 0.24);
+  animation: slowRotate 8s linear infinite;
+}
+
+.logoWrap::after {
+  background:
+    radial-gradient(circle at 12% 28%, rgba(244, 215, 122, 0.95) 0 2px, transparent 3px),
+    radial-gradient(circle at 84% 22%, rgba(244, 215, 122, 0.85) 0 1.5px, transparent 3px),
+    radial-gradient(circle at 72% 84%, rgba(244, 215, 122, 0.75) 0 2px, transparent 3px),
+    radial-gradient(circle at 24% 76%, rgba(244, 215, 122, 0.7) 0 1.5px, transparent 3px);
+  filter: drop-shadow(0 0 10px rgba(244, 215, 122, 0.8));
+  animation: sparkleDrift 2.4s ease-in-out infinite;
+}
+
+.splashLogo {
+  width: min(280px, 62vw);
+  max-height: 280px;
+  object-fit: contain;
+  opacity: 0;
+  transform: scale(1.4);
+  filter:
+    drop-shadow(0 0 18px rgba(212, 175, 55, 0.45))
+    drop-shadow(0 18px 35px rgba(0, 0, 0, 0.45));
+  animation:
+    shrinkIn 1s ease forwards,
+    fadeOut 1s ease forwards 2s;
+}
+
+.brandText {
+  z-index: 2;
+  margin-top: 18px;
+  text-align: center;
+  color: #fff8ea;
+  opacity: 0;
+  animation:
+    textIn 0.8s ease forwards 0.6s,
+    fadeOut 1s ease forwards 2.2s;
+}
+
+.brandText h1 {
+  margin: 0;
+  font-size: clamp(2rem, 7vw, 3.6rem);
+  font-weight: 900;
+  color: #f4d77a;
+  letter-spacing: -1px;
+}
+
+.brandText p {
+  margin: 8px 0 0;
+  font-size: clamp(1rem, 4vw, 1.4rem);
+  font-weight: 700;
+  color: #ffffff;
+}
+
+@keyframes shrinkIn {
+  0% {
+    opacity: 0;
+    transform: scale(1.4);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
+
+@keyframes fadeOutBg {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes ringPulse {
+  0%,
+  100% {
+    transform: scale(0.92);
+    opacity: 0.45;
+  }
+
+  50% {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+}
+
+@keyframes textIn {
+  0% {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slowRotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes sparkleDrift {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(0.94) rotate(0deg);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.03) rotate(10deg);
+  }
+}
+
+@media (max-width: 640px) {
+  .logoWrap {
+    width: 220px;
+    height: 220px;
+  }
+
+  .splash::before {
+    width: 320px;
+    height: 320px;
+  }
+}

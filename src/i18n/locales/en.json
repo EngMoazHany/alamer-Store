@@ -1,0 +1,78 @@
+{
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "about": "About",
+    "contact": "Contact",
+    "cart": "Cart",
+    "myOrder": "My Order"
+  },
+  "actions": {
+    "browseProducts": "Browse Products",
+    "whatsappContact": "WhatsApp Contact",
+    "addToOrder": "Add to Order",
+    "sendWhatsApp": "Send Order on WhatsApp",
+    "remove": "Remove",
+    "clearCart": "Clear Cart",
+    "callNow": "Call Now",
+    "whatsapp": "WhatsApp",
+    "openLocation": "Open Location",
+    "close": "Close",
+    "increase": "Increase quantity",
+    "decrease": "Decrease quantity",
+    "openCart": "Open cart"
+  },
+  "hero": {
+    "headline": "Mecca Al Amer Bridal Home Equipment",
+    "subtitle": "Importing Homeware & Electrical Appliances",
+    "description": "Everything a bride needs from homeware and electrical appliances with premium quality and elegant selection.",
+    "badges": [
+      "Bridal Equipment",
+      "Homeware",
+      "Electrical Appliances",
+      "Trusted Quality"
+    ]
+  },
+  "sections": {
+    "featured": "Featured Products",
+    "featuredKicker": "Elegant picks for the modern home",
+    "products": "All Products",
+    "productsKicker": "Browse the collection by need",
+    "about": "About Mecca Al Amer",
+    "contact": "Contact Details"
+  },
+  "products": {
+    "searchPlaceholder": "Search by product or category...",
+    "allProducts": "All Products",
+    "empty": "No matching products right now.",
+    "noProducts": "Add product images inside src/assets/products and they will appear here automatically.",
+    "category": "Category"
+  },
+  "cart": {
+    "title": "My Order",
+    "emptyTitle": "Cart is empty",
+    "emptyText": "Choose products, then send your order directly on WhatsApp.",
+    "quantity": "Quantity"
+  },
+  "about": {
+    "text": "Mecca Al Amer Bridal Home Equipment, managed by Mohamed Amer El Khawaga, specializes in bridal home preparation, imported homeware, and electrical appliances with a carefully selected collection for every modern home."
+  },
+  "contact": {
+    "phone": "Phone",
+    "whatsappOrder": "WhatsApp Orders",
+    "address": "Address"
+  },
+  "footer": {
+    "copyright": "All rights reserved",
+    "developerCredit": "Website Designed & Developed by Eng.Moaz Hany El Mahdy"
+  },
+  "splash": {
+    "name": "Mecca Al Amer",
+    "subtitle": "Bridal Home Equipment"
+  },
+  "language": {
+    "label": "Language",
+    "arabic": "العربية",
+    "english": "English"
+  }
+}
