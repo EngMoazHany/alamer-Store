@@ -8,6 +8,7 @@ import {
 import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import { storeInfo } from '../data/storeInfo'
+import { getWhatsAppContactUrl } from '../utils/whatsapp'
 import {
   buttonHover,
   buttonTap,
@@ -24,7 +25,7 @@ function buildWhatsAppUrl(contact, role, isArabic) {
     ? `السلام عليكم، أريد التواصل مع ${role} في مكة العامر.`
     : `Hello, I would like to contact the ${role} at Mecca Al Amer.`
 
-  return `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(message)}`
+  return getWhatsAppContactUrl(message, contact.whatsapp)
 }
 
 function ManagementSection() {

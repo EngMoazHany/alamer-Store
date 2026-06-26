@@ -35,10 +35,15 @@ export function getWhatsAppOrderUrl(items, language = 'ar') {
   return `https://wa.me/${storeInfo.whatsappDigits}?text=${encodeURIComponent(message)}`
 }
 
+export function getWhatsAppContactUrl(message, phoneDigits = storeInfo.whatsappDigits) {
+  const text = message ? `?text=${encodeURIComponent(message)}` : ''
+  return `https://wa.me/${phoneDigits}${text}`
+}
+
 export function openWhatsAppOrder(items, language = 'ar') {
   window.open(getWhatsAppOrderUrl(items, language), '_blank', 'noopener,noreferrer')
 }
 
 export function openWhatsAppContact() {
-  window.open(`https://wa.me/${storeInfo.whatsappDigits}`, '_blank', 'noopener,noreferrer')
+  window.open(getWhatsAppContactUrl(), '_blank', 'noopener,noreferrer')
 }

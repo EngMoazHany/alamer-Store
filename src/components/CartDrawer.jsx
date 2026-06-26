@@ -84,6 +84,9 @@ function CartDrawer() {
                             alt={name}
                             className="h-20 w-20 shrink-0 rounded-2xl bg-white object-contain p-2"
                             loading="lazy"
+                            decoding="async"
+                            width="80"
+                            height="80"
                           />
                           <div className="min-w-0 flex-1">
                             <h3 className="line-clamp-2 text-sm font-black leading-6 text-purpleDark">

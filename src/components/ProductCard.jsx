@@ -22,11 +22,9 @@ function ProductCard({ product }) {
 
   return (
     <motion.article
-      layout
       variants={staggerItem}
       initial="hidden"
       animate="visible"
-      exit={{ opacity: 0, scale: 0.96, y: 12, transition: { duration: 0.18 } }}
       whileHover={{ y: -6 }}
       className="group flex min-h-[280px] flex-col overflow-hidden rounded-[1.75rem] border border-white/80 bg-white/80 p-3 shadow-luxury backdrop-blur-xl transition duration-300 hover:shadow-gold"
     >
@@ -35,6 +33,9 @@ function ProductCard({ product }) {
           src={product.image}
           alt={name}
           loading="lazy"
+          decoding="async"
+          width="320"
+          height="320"
           className={`h-full w-full object-contain transition duration-500 group-hover:scale-[1.025] ${
             isFinalAd ? 'p-1.5' : 'p-4'
           }`}

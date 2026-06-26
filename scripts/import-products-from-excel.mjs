@@ -22,6 +22,8 @@ const DEFAULT_CATEGORY = {
   categoryEn: 'All Products',
 }
 
+const EXPECTED_ZIP_PATH_PREFIXES = ['xl/media/', 'xl/drawings/', 'xl/worksheets/', 'xl/_rels/']
+
 function padProductNumber(value) {
   return String(value).padStart(3, '0')
 }
@@ -47,6 +49,22 @@ function columnLettersToIndex(letters) {
 
 function toPublicPath(filePath) {
   return `/${filePath.split(path.sep).join('/')}`
+}
+
+function validateZipPath(zipPath) {
+  const normalizedPath = path.posix.normalize(String(zipPath || '')).replace(/^\/+/, '')
+  const isExpectedPath = EXPECTED_ZIP_PATH_PREFIXES.some((prefix) => normalizedPath.startsWith(prefix))
+
+  if (
+    !normalizedPath ||
+    normalizedPath.startsWith('../') ||
+    normalizedPath.includes('/../') ||
+    !isExpectedPath
+  ) {
+    throw new Error(`Unexpected XLSX internal path: ${zipPath}`)
+  }
+
+  return normalizedPath
 }
 
 function englishNameFallback(nameAr, productNumber) {
@@ -100,14 +118,13 @@ async function saveWebp(buffer, fileName) {
   return toPublicPath(path.join('products', 'excel', fileName))
 }
 
-function buildProduct({ productNumber, nameAr, squarePath, portraitPath }) {
+function buildProduct({ productNumber, nameAr, squarePath }) {
   const productId = `product-${padProductNumber(productNumber)}`
   return {
     id: productId,
     nameAr,
     nameEn: englishNameFallback(nameAr, productNumber),
     image: squarePath,
-    portraitImage: portraitPath || null,
     categoryAr: DEFAULT_CATEGORY.categoryAr,
     categoryEn: DEFAULT_CATEGORY.categoryEn,
     source: 'excel-final-ad',
@@ -172,11 +189,11 @@ async function importWithExcelJs() {
     const portraitImageId = portraitColumn ? imagesByCell.get(`${rowNumber}:${portraitColumn}`) : null
     const portraitBuffer = portraitImageId != null ? getImageBufferFromWorkbook(workbook, portraitImageId) : null
 
-    const [squarePath, portraitPath] = await Promise.all([
+    const [squarePath] = await Promise.all([
       saveWebp(squareBuffer, `${productId}-1080.webp`),
       portraitBuffer ? saveWebp(portraitBuffer, `${productId}-1350.webp`) : Promise.resolve(null),
     ])
-    products.push(buildProduct({ productNumber, nameAr, squarePath, portraitPath }))
+    products.push(buildProduct({ productNumber, nameAr, squarePath }))
     productNumber += 1
   }
 
@@ -215,9 +232,9 @@ function parseRelationships(xml) {
 }
 
 function resolveZipPath(baseFile, target) {
-  if (target.startsWith('/')) return target.slice(1)
+  if (target.startsWith('/')) return validateZipPath(target)
   const baseDir = path.posix.dirname(baseFile)
-  return path.posix.normalize(path.posix.join(baseDir, target))
+  return validateZipPath(path.posix.join(baseDir, target))
 }
 
 function parseAnchoredImages(drawingXml, drawingRels, drawingFile) {
@@ -247,7 +264,7 @@ function parseAnchoredImages(drawingXml, drawingRels, drawingFile) {
 
 async function importWithZipFallback() {
   const zip = await JSZip.loadAsync(await fs.readFile(inputFile))
-  const sheetFile = 'xl/worksheets/sheet1.xml'
+  const sheetFile = validateZipPath('xl/worksheets/sheet1.xml')
   const sheetXml = await zip.file(sheetFile)?.async('string')
   if (!sheetXml) throw new Error('Could not find xl/worksheets/sheet1.xml')
 
@@ -263,14 +280,14 @@ async function importWithZipFallback() {
     throw new Error(`Missing required columns: ${REQUIRED_COLUMNS.nameAr}, ${REQUIRED_COLUMNS.square}`)
   }
 
-  const sheetRelsFile = 'xl/worksheets/_rels/sheet1.xml.rels'
+  const sheetRelsFile = validateZipPath('xl/worksheets/_rels/sheet1.xml.rels')
   const sheetRelsXml = await zip.file(sheetRelsFile)?.async('string')
   const sheetRels = parseRelationships(sheetRelsXml || '')
   const drawingTarget = [...sheetRels.values()].find((target) => target.includes('drawing'))
-  const drawingFile = drawingTarget ? resolveZipPath(sheetFile, drawingTarget) : 'xl/drawings/drawing1.xml'
+  const drawingFile = drawingTarget ? resolveZipPath(sheetFile, drawingTarget) : validateZipPath('xl/drawings/drawing1.xml')
   const drawingRelsFile = `${path.posix.dirname(drawingFile)}/_rels/${path.posix.basename(drawingFile)}.rels`
-  const drawingXml = await zip.file(drawingFile)?.async('string')
-  const drawingRelsXml = await zip.file(drawingRelsFile)?.async('string')
+  const drawingXml = await zip.file(validateZipPath(drawingFile))?.async('string')
+  const drawingRelsXml = await zip.file(validateZipPath(drawingRelsFile))?.async('string')
 
   if (!drawingXml || !drawingRelsXml) throw new Error('Could not find drawing XML relationships for embedded images')
 
@@ -292,15 +309,15 @@ async function importWithZipFallback() {
     }
 
     const productId = `product-${padProductNumber(productNumber)}`
-    const squareBuffer = await zip.file(squareMediaPath)?.async('nodebuffer')
+    const squareBuffer = await zip.file(validateZipPath(squareMediaPath))?.async('nodebuffer')
     const portraitMediaPath = portraitColumn ? imagesByCell.get(`${rowNumber}:${portraitColumn}`) : null
-    const portraitBuffer = portraitMediaPath ? await zip.file(portraitMediaPath)?.async('nodebuffer') : null
+    const portraitBuffer = portraitMediaPath ? await zip.file(validateZipPath(portraitMediaPath))?.async('nodebuffer') : null
 
-    const [squarePath, portraitPath] = await Promise.all([
+    const [squarePath] = await Promise.all([
       saveWebp(squareBuffer, `${productId}-1080.webp`),
       portraitBuffer ? saveWebp(portraitBuffer, `${productId}-1350.webp`) : Promise.resolve(null),
     ])
-    products.push(buildProduct({ productNumber, nameAr, squarePath, portraitPath }))
+    products.push(buildProduct({ productNumber, nameAr, squarePath }))
     productNumber += 1
   }
 

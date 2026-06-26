@@ -1,15 +1,26 @@
-import { useMemo, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { useEffect, useMemo, useState } from 'react'
+import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import SearchBar from './SearchBar'
 import ProductCard from './ProductCard'
 import { fadeDown, fadeUp, staggerContainer, staggerItem, viewportOnce } from '../utils/animations'
 
+function getProductBatchConfig() {
+  const isDesktop = window.matchMedia('(min-width: 1024px)').matches
+  return {
+    initial: isDesktop ? 36 : 24,
+    step: isDesktop ? 24 : 12,
+  }
+}
+
 function ProductGrid({ products, limit }) {
   const { t, i18n } = useTranslation()
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState('all')
+  const [batchConfig, setBatchConfig] = useState(getProductBatchConfig)
+  const [visibleCount, setVisibleCount] = useState(() => getProductBatchConfig().initial)
   const isArabic = i18n.language === 'ar'
+  const shouldUseLoadMore = !limit
 
   const categories = useMemo(() => {
     const categoryMap = new Map()
@@ -25,27 +36,58 @@ function ProductGrid({ products, limit }) {
     return [{ id: 'all', label: t('products.allProducts') }, ...categoryMap.values()]
   }, [products, isArabic, t])
 
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(min-width: 1024px)')
+    const handleViewportChange = () => {
+      const nextConfig = getProductBatchConfig()
+      setBatchConfig(nextConfig)
+      setVisibleCount((current) => Math.max(current, nextConfig.initial))
+    }
+
+    mediaQuery.addEventListener('change', handleViewportChange)
+    return () => mediaQuery.removeEventListener('change', handleViewportChange)
+  }, [])
+
   const filteredProducts = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase()
     const matchesCategory = (product) =>
       category === 'all' || `${product.categoryAr}|${product.categoryEn}` === category
 
-    return products
-      .filter((product) => {
-        const searchable = [
-          product.nameAr,
-          product.nameEn,
-          product.filename,
-          product.categoryAr,
-          product.categoryEn,
-        ]
-          .join(' ')
-          .toLowerCase()
+    return products.filter((product) => {
+      const searchable = [
+        product.nameAr,
+        product.nameEn,
+        product.filename,
+        product.categoryAr,
+        product.categoryEn,
+      ]
+        .join(' ')
+        .toLowerCase()
 
-        return matchesCategory(product) && (!normalizedQuery || searchable.includes(normalizedQuery))
-      })
-      .slice(0, limit || products.length)
-  }, [products, query, category, limit])
+      return matchesCategory(product) && (!normalizedQuery || searchable.includes(normalizedQuery))
+    })
+  }, [products, query, category])
+
+  const visibleProducts = useMemo(
+    () => filteredProducts.slice(0, shouldUseLoadMore ? visibleCount : limit),
+    [filteredProducts, limit, shouldUseLoadMore, visibleCount],
+  )
+
+  const hasMoreProducts = shouldUseLoadMore && visibleProducts.length < filteredProducts.length
+  const resetVisibleCount = () => {
+    if (shouldUseLoadMore) setVisibleCount(batchConfig.initial)
+  }
+  const handleSearchChange = (value) => {
+    setQuery(value)
+    resetVisibleCount()
+  }
+  const handleCategoryChange = (value) => {
+    setCategory(value)
+    resetVisibleCount()
+  }
+  const handleLoadMore = () => {
+    setVisibleCount((current) => Math.min(current + batchConfig.step, filteredProducts.length))
+  }
 
   if (!products.length) {
     return (
@@ -64,7 +106,7 @@ function ProductGrid({ products, limit }) {
   return (
     <div className="space-y-5">
       <motion.div variants={fadeDown} initial="hidden" whileInView="visible" viewport={viewportOnce}>
-        <SearchBar value={query} onChange={setQuery} />
+        <SearchBar value={query} onChange={handleSearchChange} />
       </motion.div>
       <motion.div
         variants={staggerContainer}
@@ -79,7 +121,7 @@ function ProductGrid({ products, limit }) {
             <motion.button
               key={item.id}
               type="button"
-              onClick={() => setCategory(item.id)}
+              onClick={() => handleCategoryChange(item.id)}
               variants={staggerItem}
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.96 }}
@@ -94,18 +136,16 @@ function ProductGrid({ products, limit }) {
           )
         })}
       </motion.div>
-      {filteredProducts.length ? (
+      {visibleProducts.length ? (
         <motion.div
           variants={staggerContainer}
           initial="hidden"
           animate="visible"
           className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4"
         >
-          <AnimatePresence initial={false}>
-            {filteredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </AnimatePresence>
+          {visibleProducts.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
         </motion.div>
       ) : (
         <motion.div
@@ -115,6 +155,19 @@ function ProductGrid({ products, limit }) {
           className="rounded-[2rem] border border-gold/25 bg-white/75 p-8 text-center font-bold text-purpleDark"
         >
           {t('products.empty')}
+        </motion.div>
+      )}
+      {hasMoreProducts && (
+        <motion.div variants={fadeUp} initial="hidden" animate="visible" className="flex justify-center pt-2">
+          <motion.button
+            type="button"
+            onClick={handleLoadMore}
+            whileHover={{ y: -2 }}
+            whileTap={{ scale: 0.96 }}
+            className="inline-flex min-h-12 items-center justify-center rounded-2xl bg-gradient-to-r from-burgundy to-purpleDeep px-7 text-sm font-black text-white shadow-lg shadow-burgundy/20"
+          >
+            {t('products.loadMore', { defaultValue: isArabic ? 'عرض المزيد' : 'Load More' })}
+          </motion.button>
         </motion.div>
       )}
     </div>

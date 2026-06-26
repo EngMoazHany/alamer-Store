@@ -2,6 +2,7 @@ import { MapPin, MessageCircle, Phone } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import { storeInfo } from '../data/storeInfo'
+import { getWhatsAppContactUrl } from '../utils/whatsapp'
 import {
   buttonHover,
   buttonTap,
@@ -53,9 +54,9 @@ function ContactSection() {
                   {t('actions.callNow')}
                 </motion.a>
                 <motion.a
-                  href={`https://wa.me/${storeInfo.whatsappDigits}`}
+                  href={getWhatsAppContactUrl()}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   whileHover={buttonHover}
                   whileTap={buttonTap}
                   className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl border border-gold/35 bg-white/10 px-5 text-sm font-black text-white"
