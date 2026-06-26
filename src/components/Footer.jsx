@@ -21,7 +21,7 @@ function Footer() {
       <div className="absolute -top-24 h-52 w-52 rounded-full bg-burgundy/22 blur-3xl ltr:-right-16 rtl:-left-16" />
 
       <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1fr_1fr] lg:items-start">
-        <motion.div variants={fadeUp} className="rounded-[2rem] border border-white/10 bg-white/[0.055] p-5 backdrop-blur-xl">
+        <motion.div variants={fadeUp} className="rounded-[1.65rem] border border-white/12 bg-white/[0.06] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.10)] backdrop-blur-xl">
           <div className="flex items-center gap-4">
             <motion.img
               src={logo}
@@ -40,15 +40,15 @@ function Footer() {
         </motion.div>
 
         <motion.div variants={staggerContainer} className="grid gap-3 text-sm font-bold leading-7 text-cream/86">
-          <motion.div variants={staggerItem} className="flex gap-3 rounded-3xl border border-white/10 bg-white/[0.055] p-4 backdrop-blur">
+          <motion.div variants={staggerItem} className="flex gap-3 rounded-2xl border border-white/10 bg-white/[0.06] p-4 backdrop-blur">
             <Phone className="mt-1 h-5 w-5 shrink-0 text-goldLight" />
             <span>{storeInfo.phone}</span>
           </motion.div>
-          <motion.div variants={staggerItem} className="flex gap-3 rounded-3xl border border-white/10 bg-white/[0.055] p-4 backdrop-blur">
+          <motion.div variants={staggerItem} className="flex gap-3 rounded-2xl border border-white/10 bg-white/[0.06] p-4 backdrop-blur">
             <MessageCircle className="mt-1 h-5 w-5 shrink-0 text-goldLight" />
             <span>{storeInfo.whatsapp}</span>
           </motion.div>
-          <motion.div variants={staggerItem} className="flex gap-3 rounded-3xl border border-white/10 bg-white/[0.055] p-4 backdrop-blur">
+          <motion.div variants={staggerItem} className="flex gap-3 rounded-2xl border border-white/10 bg-white/[0.06] p-4 backdrop-blur">
             <MapPin className="mt-1 h-5 w-5 shrink-0 text-goldLight" />
             <span>{isArabic ? storeInfo.addressAr : storeInfo.addressEn}</span>
           </motion.div>

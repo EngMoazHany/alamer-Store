@@ -32,7 +32,7 @@ function ContactSection() {
           initial="hidden"
           whileInView="visible"
           viewport={viewportOnce}
-          className="overflow-hidden rounded-[2rem] bg-[radial-gradient(circle_at_top,#8A1E4D_0%,#3B0A50_45%,#25002F_100%)] p-5 text-white shadow-luxury lg:p-8"
+          className="overflow-hidden rounded-[2rem] border border-gold/18 bg-[radial-gradient(circle_at_top,#8A1E4D_0%,#3B0A50_45%,#25002F_100%)] p-5 text-white shadow-[0_30px_86px_rgba(37,0,47,0.20)] lg:p-8"
         >
           <div className="grid gap-8 lg:grid-cols-[1fr_1.1fr] lg:items-center">
             <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
@@ -48,7 +48,7 @@ function ContactSection() {
                   href={`tel:${storeInfo.phone}`}
                   whileHover={buttonHover}
                   whileTap={buttonTap}
-                  className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-gold px-5 text-sm font-black text-purpleDark"
+                  className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-gold to-goldLight px-5 text-sm font-black text-purpleDark shadow-[0_14px_34px_rgba(212,175,55,0.24)]"
                 >
                   <Phone className="h-4 w-4" />
                   {t('actions.callNow')}
@@ -59,7 +59,7 @@ function ContactSection() {
                   rel="noopener noreferrer"
                   whileHover={buttonHover}
                   whileTap={buttonTap}
-                  className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl border border-gold/35 bg-white/10 px-5 text-sm font-black text-white"
+                  className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl border border-gold/35 bg-white/11 px-5 text-sm font-black text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.14)]"
                 >
                   <MessageCircle className="h-4 w-4" />
                   {t('actions.whatsapp')}
@@ -70,7 +70,7 @@ function ContactSection() {
                   rel="noopener noreferrer"
                   whileHover={buttonHover}
                   whileTap={buttonTap}
-                  className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl border border-gold/35 bg-white/10 px-5 text-sm font-black text-white"
+                  className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl border border-gold/35 bg-white/11 px-5 text-sm font-black text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.14)]"
                 >
                   <MapPin className="h-4 w-4" />
                   {t('actions.openLocation')}
@@ -91,7 +91,7 @@ function ContactSection() {
                     key={row.label}
                     variants={staggerItem}
                     whileHover={{ y: -3, borderColor: 'rgba(212,175,55,0.34)' }}
-                    className="rounded-3xl border border-white/15 bg-white/10 p-4 backdrop-blur"
+                    className="rounded-3xl border border-white/15 bg-white/[0.105] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur"
                   >
                     <div className="flex gap-3">
                       <motion.div

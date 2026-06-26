@@ -53,6 +53,13 @@ a {
   -webkit-tap-highlight-color: transparent;
 }
 
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 3px solid rgba(212, 175, 55, 0.42);
+  outline-offset: 3px;
+}
+
 img {
   max-width: 100%;
 }

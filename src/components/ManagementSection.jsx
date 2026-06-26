@@ -81,7 +81,7 @@ function ManagementSection() {
                 key={contact.phone}
                 variants={staggerItem}
                 whileHover={{ y: -6, borderColor: 'rgba(212,175,55,0.42)' }}
-                className="group relative overflow-hidden rounded-[2rem] border border-gold/20 bg-white/78 p-5 shadow-[0_24px_70px_rgba(37,0,47,0.12)] backdrop-blur-xl transition duration-300 hover:shadow-gold"
+                className="group relative overflow-hidden rounded-[1.6rem] border border-gold/22 bg-white/84 p-5 shadow-[0_22px_64px_rgba(37,0,47,0.11)] backdrop-blur-xl transition duration-300 hover:shadow-gold"
               >
                 <div className="gold-line-shimmer absolute inset-x-7 top-0 h-px bg-gradient-to-r from-transparent via-gold/70 to-transparent" />
                 <div className="absolute -top-14 h-32 w-32 rounded-full bg-gold/12 blur-2xl ltr:-right-12 rtl:-left-12" />

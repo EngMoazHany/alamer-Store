@@ -34,8 +34,8 @@ function Navbar() {
       variants={fadeDown}
       className={`sticky top-0 z-40 transition duration-300 ${
         scrolled
-          ? 'border-b border-gold/20 bg-cream/90 shadow-[0_14px_44px_rgba(37,0,47,0.10)] backdrop-blur-2xl'
-          : 'border-b border-transparent bg-cream/78 backdrop-blur-xl'
+          ? 'border-b border-gold/25 bg-cream/92 shadow-[0_16px_46px_rgba(37,0,47,0.12)] backdrop-blur-2xl'
+          : 'border-b border-gold/10 bg-cream/82 backdrop-blur-xl'
       }`}
     >
       <nav className="mx-auto flex min-h-16 max-w-7xl items-center justify-between gap-2 px-3 py-2 sm:px-6 lg:px-8">
@@ -43,7 +43,7 @@ function Navbar() {
         <Link
           to="/"
           aria-label={t('nav.home')}
-          className="group flex min-w-0 items-center gap-2 rounded-full border border-gold/20 bg-gradient-to-r from-white/86 to-cream/82 py-1.5 pl-3 pr-1.5 shadow-[0_10px_30px_rgba(37,0,47,0.08)] backdrop-blur-xl transition hover:border-gold/40 rtl:pl-1.5 rtl:pr-3"
+          className="group flex min-w-0 items-center gap-2 rounded-full border border-gold/24 bg-gradient-to-r from-white/92 to-cream/86 py-1.5 pl-3 pr-1.5 shadow-[0_12px_34px_rgba(37,0,47,0.10)] backdrop-blur-xl transition hover:border-gold/45 rtl:pl-1.5 rtl:pr-3"
         >
           <span className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[radial-gradient(circle,#F4D77A_0%,#D4AF37_48%,#3B0A50_100%)] p-[1px] shadow-sm transition group-hover:shadow-[0_0_22px_rgba(212,175,55,0.38)]">
             <img src={logo} alt={t('splash.name')} className="h-full w-full rounded-full object-cover" />
@@ -59,19 +59,19 @@ function Navbar() {
         </Link>
         </motion.div>
 
-        <div className="hidden items-center gap-1 rounded-full border border-gold/20 bg-white/62 p-1 shadow-[0_12px_34px_rgba(37,0,47,0.08)] backdrop-blur-xl lg:flex">
+        <div className="hidden items-center gap-1 rounded-full border border-gold/22 bg-white/68 p-1 shadow-[0_12px_34px_rgba(37,0,47,0.09)] backdrop-blur-xl lg:flex">
           {links.map((link) => (
             <NavLink
               key={link.to}
               to={link.to}
-              className="relative rounded-full px-5 py-2.5 text-sm font-black text-purpleDark/82 transition hover:text-purpleDark"
+              className="relative rounded-full px-5 py-2.5 text-sm font-black text-purpleDark/80 transition hover:text-purpleDark"
             >
               {({ isActive }) => (
                 <>
                   {isActive && (
                     <motion.span
                       layoutId="navbar-active-pill"
-                      className="absolute inset-0 rounded-full bg-purpleDeep shadow-[inset_0_0_0_1px_rgba(244,215,122,0.28)]"
+                      className="absolute inset-0 rounded-full bg-[linear-gradient(135deg,#3B0A50,#8A1E4D)] shadow-[inset_0_0_0_1px_rgba(244,215,122,0.34),0_10px_24px_rgba(59,10,80,0.18)]"
                       transition={{ type: 'spring', stiffness: 380, damping: 32 }}
                     />
                   )}
@@ -92,7 +92,7 @@ function Navbar() {
             whileTap={buttonTap}
             animate={cartCount > 0 ? { scale: [1, 1.12, 1] } : { scale: 1 }}
             transition={{ duration: 0.28 }}
-            className="relative inline-flex h-11 w-11 items-center justify-center rounded-full bg-[radial-gradient(circle_at_35%_25%,#8A1E4D,#3B0A50_68%,#25002F)] text-goldLight shadow-[0_12px_34px_rgba(92,18,53,0.28)] transition hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-gold/25"
+            className="relative inline-flex h-11 w-11 items-center justify-center rounded-full bg-[radial-gradient(circle_at_35%_25%,#8A1E4D,#3B0A50_68%,#25002F)] text-goldLight shadow-[0_12px_34px_rgba(92,18,53,0.30)] transition hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-gold/25"
           >
             <ShoppingBag className="h-5 w-5" />
             {cartCount > 0 && (

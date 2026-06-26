@@ -1,11 +1,11 @@
 import { memo, useState } from 'react'
 import { motion } from 'framer-motion'
-import { ShoppingBag } from 'lucide-react'
+import { ShoppingBag, ZoomIn } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { useCart } from '../hooks/useCart'
 import { buttonHover, buttonTap, staggerItem } from '../utils/animations'
 
-function ProductCard({ product }) {
+function ProductCard({ product, onImageClick }) {
   const { t, i18n } = useTranslation()
   const { addProduct } = useCart()
   const isArabic = i18n.language === 'ar'
@@ -26,9 +26,14 @@ function ProductCard({ product }) {
       initial="hidden"
       animate="visible"
       whileHover={{ y: -6 }}
-      className="group flex min-h-[280px] flex-col overflow-hidden rounded-[1.75rem] border border-white/80 bg-white/80 p-3 shadow-luxury backdrop-blur-xl transition duration-300 hover:shadow-gold"
+      className="group flex min-h-[280px] flex-col overflow-hidden rounded-[1.45rem] border border-white/85 bg-white/86 p-2.5 shadow-[0_20px_58px_rgba(37,0,47,0.12)] backdrop-blur-xl transition duration-300 hover:border-gold/32 hover:shadow-gold sm:p-3"
     >
-      <div className="relative flex aspect-square items-center justify-center overflow-hidden rounded-[1.25rem] bg-gradient-to-br from-cream via-white to-gold/10">
+      <button
+        type="button"
+        onClick={() => onImageClick(product)}
+        aria-label={`${isArabic ? 'عرض المنتج' : 'Product Preview'}: ${name}`}
+        className="relative flex aspect-square items-center justify-center overflow-hidden rounded-[1.15rem] bg-gradient-to-br from-cream via-white to-gold/10 focus:outline-none focus:ring-4 focus:ring-gold/30"
+      >
         <img
           src={product.image}
           alt={name}
@@ -45,7 +50,11 @@ function ProductCard({ product }) {
             {category}
           </span>
         )}
-      </div>
+        <span className="absolute inset-x-3 bottom-3 flex translate-y-2 items-center justify-center gap-1.5 rounded-full border border-white/45 bg-purpleDark/78 px-3 py-2 text-[11px] font-black text-goldLight opacity-0 shadow-lg backdrop-blur-md transition duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:opacity-100">
+          <ZoomIn className="h-3.5 w-3.5" />
+          {isArabic ? 'عرض' : 'Preview'}
+        </span>
+      </button>
       <div className="flex flex-1 flex-col gap-3 px-1 pt-3">
         {isFinalAd && (
           <span className="w-fit rounded-full bg-gold/12 px-3 py-1 text-[11px] font-black text-burgundy">

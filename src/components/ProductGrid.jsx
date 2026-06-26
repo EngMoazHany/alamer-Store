@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import SearchBar from './SearchBar'
 import ProductCard from './ProductCard'
+import ProductImageModal from './ProductImageModal'
 import { fadeDown, fadeUp, staggerContainer, staggerItem, viewportOnce } from '../utils/animations'
 
 function getProductBatchConfig() {
@@ -19,6 +20,7 @@ function ProductGrid({ products, limit }) {
   const [category, setCategory] = useState('all')
   const [batchConfig, setBatchConfig] = useState(getProductBatchConfig)
   const [visibleCount, setVisibleCount] = useState(() => getProductBatchConfig().initial)
+  const [selectedProduct, setSelectedProduct] = useState(null)
   const isArabic = i18n.language === 'ar'
   const shouldUseLoadMore = !limit
 
@@ -105,6 +107,7 @@ function ProductGrid({ products, limit }) {
 
   return (
     <div className="space-y-5">
+      <ProductImageModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />
       <motion.div variants={fadeDown} initial="hidden" whileInView="visible" viewport={viewportOnce}>
         <SearchBar value={query} onChange={handleSearchChange} />
       </motion.div>
@@ -144,7 +147,7 @@ function ProductGrid({ products, limit }) {
           className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4"
         >
           {visibleProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard key={product.id} product={product} onImageClick={setSelectedProduct} />
           ))}
         </motion.div>
       ) : (

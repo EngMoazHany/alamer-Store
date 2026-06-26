@@ -29,7 +29,7 @@ function AboutSection() {
             initial="hidden"
             whileInView="visible"
             viewport={viewportOnce}
-            className="relative overflow-hidden rounded-[2rem] border border-gold/22 bg-[linear-gradient(135deg,#25002F_0%,#3B0A50_52%,#8A1E4D_100%)] p-5 text-white shadow-luxury sm:p-7"
+            className="relative overflow-hidden rounded-[1.65rem] border border-gold/25 bg-[linear-gradient(135deg,#25002F_0%,#3B0A50_52%,#8A1E4D_100%)] p-5 text-white shadow-[0_28px_78px_rgba(37,0,47,0.18)] sm:p-7"
           >
             <div className="gold-line-shimmer absolute inset-x-8 top-8 h-px bg-gradient-to-r from-transparent via-gold to-transparent" />
             <div className="absolute -bottom-20 -right-20 h-52 w-52 rounded-full border border-gold/14 rtl:-left-20 rtl:right-auto" />
@@ -107,7 +107,7 @@ function AboutSection() {
             initial="hidden"
             whileInView="visible"
             viewport={viewportOnce}
-            className="relative overflow-hidden rounded-[2rem] border border-gold/20 bg-white/78 p-5 shadow-[0_26px_70px_rgba(37,0,47,0.10)] backdrop-blur-xl sm:p-8 lg:p-10"
+            className="relative overflow-hidden rounded-[1.65rem] border border-gold/22 bg-white/82 p-5 shadow-[0_26px_70px_rgba(37,0,47,0.10)] backdrop-blur-xl sm:p-8 lg:p-10"
           >
             <div className="absolute -top-16 h-40 w-40 rounded-full bg-gold/10 blur-2xl ltr:-right-14 rtl:-left-14" />
             <span className="inline-flex items-center gap-2 rounded-full bg-gold/13 px-4 py-2 text-xs font-black text-burgundy">
@@ -128,7 +128,7 @@ function AboutSection() {
               className="mt-7 grid gap-3 sm:grid-cols-3"
             >
               {badges.slice(0, 3).map((badge) => (
-                <motion.div key={badge} variants={staggerItem} className="rounded-3xl border border-gold/18 bg-cream/65 p-4">
+                <motion.div key={badge} variants={staggerItem} className="rounded-2xl border border-gold/18 bg-cream/68 p-4 shadow-sm">
                   <p className="text-sm font-black text-burgundy">{badge}</p>
                 </motion.div>
               ))}

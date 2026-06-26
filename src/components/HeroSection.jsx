@@ -42,12 +42,12 @@ function HeroSection() {
         className="absolute bottom-10 -z-10 h-52 w-52 rounded-full border border-gold/12 ltr:left-8 rtl:right-8"
       />
 
-      <div className="relative mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+      <div className="relative mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1.03fr_0.97fr] lg:items-center">
         <motion.div
           initial="hidden"
           animate="visible"
           variants={staggerContainer}
-          className="relative overflow-hidden rounded-[2rem] border border-white/14 bg-white/[0.085] p-5 shadow-[0_28px_90px_rgba(0,0,0,0.22)] backdrop-blur-2xl sm:p-8 lg:p-10"
+          className="relative overflow-hidden rounded-[2rem] border border-white/16 bg-white/[0.09] p-5 shadow-[0_30px_95px_rgba(0,0,0,0.24)] backdrop-blur-2xl sm:p-8 lg:p-10"
         >
           <div className="gold-line-shimmer absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-gold to-transparent" />
           <motion.span variants={staggerItem} className="inline-flex max-w-full items-center gap-2 rounded-full border border-gold/35 bg-gold/12 px-4 py-2 text-xs font-black text-goldLight shadow-sm">
@@ -55,10 +55,10 @@ function HeroSection() {
             <span className="truncate">{t('hero.subtitle')}</span>
           </motion.span>
 
-          <motion.h1 variants={fadeUp} className="mt-6 max-w-3xl text-[2.55rem] font-black leading-[1.12] text-white sm:text-6xl lg:text-7xl">
+          <motion.h1 variants={fadeUp} className="mt-6 max-w-3xl text-[2.45rem] font-black leading-[1.1] text-white sm:text-6xl lg:text-7xl">
             {t('hero.headline')}
           </motion.h1>
-          <motion.p variants={staggerItem} className="mt-5 max-w-2xl text-[1.02rem] font-bold leading-8 text-cream/88 sm:text-lg">
+          <motion.p variants={staggerItem} className="mt-5 max-w-2xl text-[1.02rem] font-bold leading-8 text-cream/90 sm:text-lg">
             {t('hero.description')}
           </motion.p>
 
@@ -66,7 +66,7 @@ function HeroSection() {
             <motion.div variants={staggerItem} whileHover={buttonHover} whileTap={buttonTap}>
             <Link
               to="/products"
-              className="gold-shimmer inline-flex min-h-[3.35rem] w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-gold to-goldLight px-6 text-sm font-black text-purpleDark shadow-[0_18px_46px_rgba(212,175,55,0.28)]"
+              className="gold-shimmer inline-flex min-h-[3.35rem] w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-gold to-goldLight px-6 text-sm font-black text-purpleDark shadow-[0_18px_46px_rgba(212,175,55,0.32)] ring-1 ring-white/20"
             >
               {t('actions.browseProducts')}
               <ArrowIcon className="h-4 w-4" />
@@ -78,7 +78,7 @@ function HeroSection() {
               variants={staggerItem}
               whileHover={buttonHover}
               whileTap={buttonTap}
-              className="inline-flex min-h-[3.35rem] items-center justify-center gap-2 rounded-2xl border border-gold/35 bg-white/10 px-6 text-sm font-black text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.16)] backdrop-blur transition hover:bg-white/15"
+              className="inline-flex min-h-[3.35rem] items-center justify-center gap-2 rounded-2xl border border-gold/38 bg-white/11 px-6 text-sm font-black text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] backdrop-blur transition hover:bg-white/16"
             >
               <MessageCircle className="h-4 w-4" />
               {t('actions.whatsappContact')}
@@ -90,7 +90,7 @@ function HeroSection() {
               <motion.span
                 key={badge}
                 variants={staggerItem}
-                className="flex min-h-12 items-center justify-center gap-2 rounded-2xl border border-white/12 bg-white/[0.075] px-3 text-center text-xs font-black text-cream"
+                className="flex min-h-12 items-center justify-center gap-2 rounded-2xl border border-white/14 bg-white/[0.085] px-3 text-center text-xs font-black text-cream"
               >
                 <CheckCircle2 className="hidden h-4 w-4 text-goldLight sm:block" />
                 {badge}
@@ -103,7 +103,7 @@ function HeroSection() {
           initial="hidden"
           animate="visible"
           variants={scaleIn}
-          className="soft-float relative mx-auto w-full max-w-[25rem] lg:max-w-[29rem]"
+          className="soft-float relative mx-auto w-full max-w-[24rem] lg:max-w-[28rem]"
         >
           <div className="absolute -inset-4 rounded-[2.4rem] border border-gold/14 bg-white/[0.035]" />
           <div className="relative overflow-hidden rounded-[2.15rem] border border-gold/25 bg-gradient-to-br from-cream via-white to-goldLight/35 p-3 shadow-[0_30px_90px_rgba(0,0,0,0.26)]">

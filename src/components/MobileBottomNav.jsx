@@ -15,14 +15,14 @@ function MobileBottomNav() {
   ]
 
   const itemClass =
-    'relative flex min-h-[3.35rem] flex-col items-center justify-center gap-1 rounded-2xl text-[11px] font-black text-purpleDark/84 transition hover:bg-gold/10'
+    'relative flex min-h-[3.25rem] flex-col items-center justify-center gap-1 rounded-2xl text-[11px] font-black text-purpleDark/84 transition hover:bg-gold/10'
 
   const navContent = (isActive, Icon, label) => (
     <>
       {isActive && (
         <motion.span
           layoutId="mobile-nav-active-pill"
-          className="absolute inset-0 rounded-2xl bg-purpleDeep shadow-[0_10px_24px_rgba(59,10,80,0.22)]"
+          className="absolute inset-0 rounded-2xl bg-[linear-gradient(135deg,#3B0A50,#8A1E4D)] shadow-[0_10px_24px_rgba(59,10,80,0.24)]"
           transition={{ type: 'spring', stiffness: 420, damping: 34 }}
         />
       )}
@@ -34,8 +34,8 @@ function MobileBottomNav() {
   )
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-gold/20 bg-cream/88 px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2 shadow-[0_-18px_48px_rgba(37,0,47,0.14)] backdrop-blur-2xl lg:hidden">
-      <div className="mx-auto grid max-w-md grid-cols-4 gap-1.5 rounded-[1.6rem] border border-white/70 bg-white/35 p-1">
+    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-gold/20 bg-cream/90 px-3 pb-[max(0.65rem,env(safe-area-inset-bottom))] pt-2 shadow-[0_-18px_48px_rgba(37,0,47,0.14)] backdrop-blur-2xl lg:hidden">
+      <div className="mx-auto grid max-w-md grid-cols-4 gap-1.5 rounded-[1.55rem] border border-white/75 bg-white/42 p-1">
         {links.map((link) => {
           const Icon = link.icon
           return (
@@ -48,7 +48,7 @@ function MobileBottomNav() {
           type="button"
           onClick={openCart}
           whileTap={buttonTap}
-          className="relative flex min-h-[3.35rem] flex-col items-center justify-center gap-1 rounded-2xl text-[11px] font-black text-purpleDark/84 transition hover:bg-gold/10"
+          className="relative flex min-h-[3.25rem] flex-col items-center justify-center gap-1 rounded-2xl text-[11px] font-black text-purpleDark/84 transition hover:bg-gold/10"
         >
           <ShoppingBag className="h-5 w-5" />
           <span>{t('nav.cart')}</span>
