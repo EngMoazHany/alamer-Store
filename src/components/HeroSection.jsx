@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import logo from '../assets/logo/alamer-logo.png'
 import reference from '../assets/logo/alamer-reference.png'
-import { openWhatsAppContact } from '../utils/whatsapp'
 import {
   buttonHover,
   buttonTap,
@@ -72,17 +71,18 @@ function HeroSection() {
               <ArrowIcon className="h-4 w-4" />
             </Link>
             </motion.div>
-            <motion.button
-              type="button"
-              onClick={openWhatsAppContact}
+            <motion.a
+              href="https://chat.whatsapp.com/LLKgRsP3hLDHwbzGe3H77e"
+              target="_blank"
+              rel="noopener noreferrer"
               variants={staggerItem}
               whileHover={buttonHover}
               whileTap={buttonTap}
               className="inline-flex min-h-[3.35rem] items-center justify-center gap-2 rounded-2xl border border-gold/38 bg-white/11 px-6 text-sm font-black text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] backdrop-blur transition hover:bg-white/16"
             >
               <MessageCircle className="h-4 w-4" />
-              {t('actions.whatsappContact')}
-            </motion.button>
+              {t('hero.joinWhatsAppGroup')}
+            </motion.a>
           </motion.div>
 
           <motion.div variants={staggerContainer} className="mt-7 grid grid-cols-2 gap-2 sm:grid-cols-4">

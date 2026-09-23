@@ -1,3 +1,5 @@
+const WHATSAPP_NUMBER = '201011717830'
+
 export const storeInfo = {
   nameAr: 'مكة العامر',
   fullNameAr: 'مكة العامر لتجهيز العرائس',
@@ -8,8 +10,8 @@ export const storeInfo = {
   ownerAr: 'محمد عامر الخواجه',
   ownerEn: 'Mohamed Amer El Khawaga',
   phone: '01011717830',
-  whatsapp: '+201006733344',
-  whatsappDigits: '201006733344',
+  whatsapp: `+${WHATSAPP_NUMBER}`,
+  whatsappDigits: WHATSAPP_NUMBER,
   addressAr: '2 شارع ماهر هارون، أرض اللواء، المهندسين، أمام صيدلية اللواء',
   addressEn: '2 Maher Haroun St., Ard El Lewa, Mohandessin, in front of El Lewa Pharmacy',
   mapUrl: 'https://maps.app.goo.gl/q5sWhnHUrg715FVh9?g_st=ac',
@@ -24,7 +26,7 @@ export const storeInfo = {
       nameAr: 'أ / محمد عامر الخواجه',
       nameEn: 'Mr. Mohamed Amer El Khawaga',
       phone: '01006733344',
-      whatsapp: '201006733344',
+      whatsapp: WHATSAPP_NUMBER,
     },
     {
       roleAr: 'المدير العام',
